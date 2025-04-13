@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var activeIdx: Int = 0
+    
+    func scrollTo(page: Int) {
+        activeIdx = page
+    }
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $activeIdx) {
+            NList(scrollTo: scrollTo)
+                .tag(0)
+            
+            Color.red
+                .tag(1)
         }
-        .padding()
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }
 
